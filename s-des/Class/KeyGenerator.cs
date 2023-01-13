@@ -7,7 +7,6 @@ public static class KeyGenerator
 {
     public static Keys Generate(int[] secretBitArray, bool debug = false)
     {
-        //int[] secretBitArray = {1, 0, 1, 0, 0, 0, 0, 0, 1, 0};
         var secret = new BitBuffer(secretBitArray);
 
         // Rearrange secret using P10

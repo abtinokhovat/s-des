@@ -1,15 +1,27 @@
 ﻿using s_des.Class;
-using s_des.Constants;
+
+//int[] secretBitArray = {1,0,1,0,1,0,1,0,1,0};
+//int[] plainBits = {1,0,0,1,0,1,1,0};
+
+Console.WriteLine("Insert 8-bit Plain Text");
+var plain = Console.ReadLine();
+var plainBitArray = plain!.Select(i => Convert.ToInt32(i) - 48).ToArray();
+
+Console.WriteLine("Insert 10-bit Key");
+var key = Console.ReadLine();
+var secretBitArray = key!.Select(i => Convert.ToInt32(i) - 48).ToArray();
 
 // key generation
-int[] secretBitArray = {1, 0, 1, 0, 0, 0, 0, 0, 1, 0};
 var keys = KeyGenerator.Generate(secretBitArray,true);
 
-int[] plainBits = {0, 1, 1, 1, 0, 0, 1, 0};
-var plain = new BitBuffer(plainBits);
-
 // encryption
-var cipher = Encryptor.Encrypt(plain, keys);
+var cipher = Encryptor.Encrypt(plainBitArray, keys);
+
+// decryption
+Decryptor.Decrypt(cipher, keys);
+
+
+
 
 
     

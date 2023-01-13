@@ -9,4 +9,8 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Alba.CsConsoleFormat" Version="1.0.0" />
+    </ItemGroup>
+
 </Project>

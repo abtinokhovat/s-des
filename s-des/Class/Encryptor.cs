@@ -3,10 +3,13 @@ using s_des.Entity;
 
 namespace s_des.Class;
 
-public class Encryptor
+public static class Encryptor
 {
-    public static BitBuffer Encrypt(BitBuffer plain,Keys keys)
+    public static BitBuffer Encrypt(int[] plainBits,Keys keys)
     {
+        // convert bits to bit buffer
+        var plain = new BitBuffer(plainBits);
+        
         // initial permutation
         var ip = Mapper.MapPermutation(Permutation.IP, plain);
         Console.WriteLine($"Permuted by IP = {ip}\n");
