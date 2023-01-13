@@ -6,23 +6,18 @@
 Console.WriteLine("Insert 8-bit Plain Text");
 var plain = Console.ReadLine();
 var plainBitArray = plain!.Select(i => Convert.ToInt32(i) - 48).ToArray();
+Console.WriteLine("\n");
 
 Console.WriteLine("Insert 10-bit Key");
 var key = Console.ReadLine();
 var secretBitArray = key!.Select(i => Convert.ToInt32(i) - 48).ToArray();
+Console.WriteLine("\n");
 
 // key generation
-var keys = KeyGenerator.Generate(secretBitArray,true);
+var keys = KeyGenerator.Generate(secretBitArray);
 
 // encryption
-var cipher = Encryptor.Encrypt(plainBitArray, keys);
+var cipher = Transformer.Encrypt(new BitBuffer(plainBitArray), keys);
 
 // decryption
-Decryptor.Decrypt(cipher, keys);
-
-
-
-
-
-    
-
+Transformer.Decrypt(cipher, keys);

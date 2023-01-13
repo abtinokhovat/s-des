@@ -119,7 +119,6 @@ public class BitBuffer
     public BitBuffer Swap()
     {
         (Left, Right) = (Right, Left);
-        //Buffer = Left?.Buffer.Concat(Right?.Buffer).ToArray();
         return this;
     }
 
@@ -136,7 +135,7 @@ public class BitBuffer
     {
         var stringified = "";
         for (var i = 0; i < Length; i++)
-            stringified += i == Length - 1 ? $"{Buffer[i]}" : $"{Buffer[i]}, ";
+            stringified += $"{Buffer[i]}";
         return stringified;
     }
 }
