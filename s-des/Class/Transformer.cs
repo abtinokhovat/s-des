@@ -5,92 +5,78 @@ namespace s_des.Class;
 
 public static class Transformer
 {
-    public static Response<BitBuffer> Fk(BitBuffer key, BitBuffer ip)
+    public static Tuple<BitBuffer,FK> Fk(BitBuffer key, BitBuffer ip)
     {
-        var strings = new SuperDic(); 
-        strings.Add("FK", "Start");
-
-        Console.WriteLine("------------------------ FK Start ------------------------\n");
+        // expand by permutation
         var expanded = Mapper.MapPermutation(Permutation.EP, ip.Right);
-        Console.WriteLine($"EP\n{expanded}\n");
-        strings.Add("EP", expanded.ToString());
 
+        // xor with key
         var xor = expanded.Xor(key);
-        Console.WriteLine($"XOR\n{xor}\n");
-        strings.Add("XOR", xor.ToString());
 
+        // map to sboxes
         var sboxMapped = Mapper.MapWithSboxs(xor);
-        Console.WriteLine($"Sbox\n{sboxMapped}\n");
-        strings.Add("Sbox", sboxMapped.ToString());
 
+        // map to permutation p4
         var p4 = Mapper.MapPermutation(Permutation.P4, sboxMapped);
-        Console.WriteLine($"P4\n{p4}\n");
-        strings.Add("P4", p4.ToString());
 
+        // xor p4 with left half of initial permutation
         var leftHalf = ip.Left.Xor(p4);
-        Console.WriteLine($"XOR\n{leftHalf}\n");
-        strings.Add("XOR", leftHalf.ToString());
-
-
-        strings.Add("FK", "Ended");
-        Console.WriteLine("------------------------ FK Generated ------------------------\n");
-        return new Response<BitBuffer>(leftHalf, strings);
+        
+        var root = new FK()
+        {
+            EP = expanded.ToString(),
+            XOR_1 = xor.ToString(),
+            Sbox = sboxMapped.ToString(),
+            P4 = p4.ToString(),
+            XOR_2 = leftHalf.ToString(),
+        };
+        
+        return new Tuple<BitBuffer, FK>(leftHalf, root);
     }
 
-    private static Response<BitBuffer> Transform(BitBuffer cipher, Keys keys, bool decrypt)
+    private static Tuple<BitBuffer,Transform> Transform(BitBuffer cipher, Keys keys, bool decrypt)
     {
-        var strings = new SuperDic();
-        var isDecryptString = decrypt ? "Decrypted" : "Encrypted";
-        strings.Add(isDecryptString, "Start");
-
         // keys
         var key1 = decrypt ? keys.Key2 : keys.Key1;
         var key2 = decrypt ? keys.Key1 : keys.Key2;
 
         // initial permutation
         var ip = Mapper.MapPermutation(Permutation.IP, cipher);
-        Console.WriteLine($"IP\n{ip}\n");
-        strings.Add("IP", ip.ToString());
 
         // call fk function
         var fk1 = Fk(key1, ip);
-        strings.Concat(fk1.Results);
-        Console.WriteLine($"FK1\n{fk1}\n");
-        strings.Add("FK1", fk1.Exit.ToString());
-
-        var swap = new BitBuffer(ip.Right.Buffer, fk1.Exit.Buffer);
-        Console.WriteLine($"SW\n{swap}\n");
-        strings.Add("SW", swap.ToString());
-
+        
+        // swap variables
+        var swap = new BitBuffer(ip.Right.Buffer, fk1.Item1.Buffer);
+        
         // call fk function
         var fk2 = Fk(key2, swap);
-        strings.Concat(fk2.Results);
-        Console.WriteLine($"FK2\n{fk2}\n");
-        strings.Add("FK2", fk2.Exit.ToString());
-
+        
         // combine ip right half and fk result
-        var combined = new BitBuffer(fk2.Exit.Buffer, swap.Right.Buffer);
-        Console.WriteLine($"Combined\n{combined}\n");
-        strings.Add("Combined", combined.ToString());
+        var combined = new BitBuffer(fk2.Item1.Buffer, swap.Right.Buffer);
 
         // ip inverse 
         var ip_1 = Mapper.MapPermutation(Permutation.IP_1, combined);
-        Console.WriteLine($"IP-1\n{ip_1}\n");
-        strings.Add("IP-1", ip_1.ToString());
 
-        Console.WriteLine($"{isDecryptString}\n{ip_1}\n");
-        strings.Add(isDecryptString, ip_1.ToString());
-        strings.Add(isDecryptString, "Ended");
+        var root = new Transform
+        {
+            IP = ip.ToString(),
+            FK_1 = fk1.Item2,
+            SW = swap.ToString(),
+            FK_2 = fk2.Item2,
+            Combined = combined.ToString(),
+            IP_1 = ip_1.ToString()
+        };
 
-        return new Response<BitBuffer>(ip_1, strings);
+        return new Tuple<BitBuffer, Transform>(ip_1, root);
     }
 
-    public static Response<BitBuffer> Decrypt(BitBuffer cipher, Keys keys)
+    public static Tuple<BitBuffer,Transform> Decrypt(BitBuffer cipher, Keys keys)
     {
         return Transform(cipher, keys, true);
     }
 
-    public static Response<BitBuffer> Encrypt(BitBuffer plain, Keys keys)
+    public static Tuple<BitBuffer,Transform> Encrypt(BitBuffer plain, Keys keys)
     {
         return Transform(plain, keys, false);
     }

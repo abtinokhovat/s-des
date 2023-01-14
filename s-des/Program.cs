@@ -1,4 +1,6 @@
 ﻿using s_des.Class;
+using s_des.Entity;
+using Formatting = Newtonsoft.Json.Formatting;
 
 //int[] secretBitArray = {1,0,1,0,1,0,1,0,1,0};
 //int[] plainBits = {1,0,0,1,0,1,1,0};
@@ -15,15 +17,21 @@ Console.WriteLine("\n");
 
 // key generation
 var keys = KeyGenerator.Generate(secretBitArray);
-var keyGenRes = keys.Results;
+var keyGenRes = keys.Item2;
 
 // encryption
-var cipher = Transformer.Encrypt(new BitBuffer(plainBitArray), keys.Exit);
-var cipherRes = cipher.Results;
+var cipher = Transformer.Encrypt(new BitBuffer(plainBitArray), keys.Item1);
+var cipherRes = cipher.Item2;
 
 // decryption
-var decrypt = Transformer.Decrypt(cipher.Exit, keys.Exit);
-var decryptRes = decrypt.Results;
+var decrypt = Transformer.Decrypt(cipher.Item1, keys.Item1);
+var decryptRes = decrypt.Item2;
 
+var res =new Root()
+{
+    KeyGeneration = keyGenRes,
+    Encryption = cipherRes,
+    Decryption = decryptRes
+};
 
-var a = 10;
+Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(res, (Formatting) System.Xml.Formatting.Indented));
