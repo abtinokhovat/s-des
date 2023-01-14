@@ -15,9 +15,15 @@ Console.WriteLine("\n");
 
 // key generation
 var keys = KeyGenerator.Generate(secretBitArray);
+var keyGenRes = keys.Results;
 
 // encryption
-var cipher = Transformer.Encrypt(new BitBuffer(plainBitArray), keys);
+var cipher = Transformer.Encrypt(new BitBuffer(plainBitArray), keys.Exit);
+var cipherRes = cipher.Results;
 
 // decryption
-Transformer.Decrypt(cipher, keys);
+var decrypt = Transformer.Decrypt(cipher.Exit, keys.Exit);
+var decryptRes = decrypt.Results;
+
+
+var a = 10;
