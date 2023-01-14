@@ -4,34 +4,15 @@ using s_des.Entity;
 
 namespace api.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class MainController : ControllerBase
 {
-    // GET: api/Main
     [HttpGet]
-    public Root Get(string plain, string key)
+    public IActionResult Get(string p, string k)
     {
-        var plainBitArray = plain!.Select(i => Convert.ToInt32(i) - 48).ToArray();
-        var secretBitArray = key!.Select(i => Convert.ToInt32(i) - 48).ToArray();
-
-        // key generation
-        var keys = KeyGenerator.Generate(secretBitArray);
-        var keyGenRes = keys.Item2;
-
-        // encryption
-        var cipher = Transformer.Encrypt(new BitBuffer(plainBitArray), keys.Item1);
-        var cipherRes = cipher.Item2;
-
-        // decryption
-        var decrypt = Transformer.Decrypt(cipher.Item1, keys.Item1);
-        var decryptRes = decrypt.Item2;
-        
-        return new Root()
-        {
-            KeyGeneration = keyGenRes,
-            Encryption = cipherRes,
-            Decryption = decryptRes
-        };
+        if(p!.Length != 8) return BadRequest("Key must be 8 bits long");
+        if (k!.Length != 10) return BadRequest("Key must be 10 bits long");
+        return Ok(Main.MakeWithString(p, k));
     }
 }
