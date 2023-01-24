@@ -7,9 +7,15 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CustomEdge: typeof import('./components/CustomEdge.vue')['default']
+    CustomNode: typeof import('./components/CustomNode.vue')['default']
+    KeyGeneration: typeof import('./components/KeyGeneration/KeyGeneration.vue')['default']
+    PlainNode: typeof import('./components/PlainNode.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SecretNode: typeof import('./components/SecretNode.vue')['default']
+    TheArrow: typeof import('./components/TheArrow.vue')['default']
     TheBox: typeof import('./components/TheBox.vue')['default']
     TheCounter: typeof import('./components/TheCounter.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
