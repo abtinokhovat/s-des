@@ -4,11 +4,13 @@ import CustomNode from '../components/CustomNode.vue'
 import PlainNode from "~/components/PlainNode.vue";
 import {useDataStore} from "~/stores/data";
 import {storeToRefs} from "pinia";
+import SecretNode from "~/components/SecretNode.vue";
+import TheFooter from "~/components/TheFooter.vue";
 
 const edgeLabelBgStyle = {fill: 'skyblue'}
 
 const store = useDataStore()
-const {plain,flow,KeyGeneration} = storeToRefs(store)
+const {plain,flow} = storeToRefs(store)
 
 const data = flow
 
@@ -32,13 +34,13 @@ const {nodes,setInteractive} = useVueFlow({
       position: {x: 300, y: 160},
       style: {backgroundColor: 'rgba(16, 185, 129, 0.5)', width: '220px', height: '850px'},
     },
-    {
-      id: '1',
-      type: 'custom',
-      data: {title: "P10",indent1:"KeyGeneration",indent2:"P10"},
-      parentNode: '111',
-      position: {x: 40, y: 35},
-    },
+    // {
+    //   id: '1',
+    //   type: 'custom',
+    //   data: {title: "P10",indent1:"KeyGeneration",indent2:"P10"},
+    //   parentNode: '111',
+    //   position: {x: 40, y: 35},
+    // },
     {
       id: 'shift_1',
       label: 'shift',
@@ -455,7 +457,7 @@ nodes.value.find(a => a.id === "plain")!.selectable = true
     </vue-flow>
   </div>
   <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
-    <TheFooter/>
+    <the-footer/>
     <div class="mt-5 mx-auto text-center opacity-75 dark:opacity-50 text-sm">
       Abtin Okhovat
     </div>

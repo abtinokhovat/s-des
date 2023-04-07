@@ -8,7 +8,6 @@ export const useDataStore = defineStore('data', {
             plain: '10101010',
             secret: '1010101010',
             flow: init,
-            KeyGeneration:{P10:''}
         }
     },
     actions: {
@@ -43,7 +42,6 @@ export const useDataStore = defineStore('data', {
             fetch(`${url}/Main?p=${this.plain}&k=${this.secret}`, requestOptions)
                 .then((response) => response.json())
                 .then((data) => {
-                    this.KeyGeneration.P10 = data.KeyGeneration.P10
                     this.flow = data
                 })
                 .catch(error => console.log('error', error));

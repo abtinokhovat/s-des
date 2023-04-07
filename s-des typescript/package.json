@@ -1,0 +1,28 @@
+{
+  "name": "s-des-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/indexm.js",
+  "module": "./dist/indexm.js",
+  "scripts": {
+    "run": "ts-node src/index.ts",
+    "build": "tsup src/index.ts",
+    "start": "npm run build -- --watch",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "exports": {
+    "default": "./dist/index.cjs",
+    "require": "./dist/index.cjs",
+    "import": "./dist/index.mjs",
+    "node": "./dist/index.cjs"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "tsup": "^6.7.0",
+    "typescript": "^5.0.3"
+  }
+}
