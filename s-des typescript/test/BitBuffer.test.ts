@@ -37,9 +37,17 @@ describe("BitBuffer", () => {
       const buffer = [...left, ...right];
       const bitBuffer = new BitBuffer(left, right);
       expect(bitBuffer.buffer).toEqual(buffer);
-      expect(bitBuffer.left.buffer).toEqual(left);
-      expect(bitBuffer.right.buffer).toEqual(right);
+      expect(bitBuffer.left!.buffer).toEqual(left);
+      expect(bitBuffer.right!.buffer).toEqual(right);
       expect(bitBuffer.length).toBe(buffer.length);
+    });
+
+    it("should divide the buffer into halves correctly", () => {
+      const bitArray = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0];
+      const bitBuffer = new BitBuffer(bitArray);
+      expect(bitBuffer.buffer).toEqual(bitArray);
+      expect(bitBuffer.left!.buffer).toEqual([1, 0, 1, 0, 1]);
+      expect(bitBuffer.right!.buffer).toEqual([0, 1, 0, 1, 0]);
     });
   });
 

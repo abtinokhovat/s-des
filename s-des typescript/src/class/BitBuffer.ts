@@ -22,7 +22,8 @@ export default class BitBuffer {
     this._buffer = value;
     this.length = value.length;
 
-    if (this.length < BitBuffer.MaxHalfSize) return;
+    if (value.length < BitBuffer.MaxHalfSize || value.length % 2 !== 0) return;
+
     this.left = new BitBuffer(this._buffer.slice(0, this.length / 2));
     this.right = new BitBuffer(
       this._buffer.slice(this.length / 2, this.length)
