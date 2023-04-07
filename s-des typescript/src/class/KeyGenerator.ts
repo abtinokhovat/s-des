@@ -6,10 +6,7 @@ import { Keys } from "../entity/keys";
 
 export class KeyGenerator {
   static generate(secretBitArray: Array<number>): [Keys, KeyGeneration] {
-    const copy = secretBitArray;
-    const secret = new BitBuffer(copy);
-    console.log(copy);
-
+    const secret = new BitBuffer(secretBitArray);
     const root = new KeyGeneration();
 
     // Rearrange secret using P10
