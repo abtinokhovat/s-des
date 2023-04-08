@@ -4,10 +4,10 @@ import { Permutation } from "../constants/permutation";
 import { FK, Transform } from "../entity/flow";
 import { Keys } from "../entity/keys";
 
-class Transformer {
+export default class Transformer {
   static Fk(key: BitBuffer, ip: BitBuffer): [BitBuffer, FK] {
     // expand by permutation
-    const expanded = Mapper.MapPermutation(Permutation.EP, ip.right);
+    const expanded = Mapper.MapPermutation(Permutation.EP, ip.right!);
     // xor with key
     const xor = expanded.xor(key);
 
@@ -18,7 +18,7 @@ class Transformer {
     const p4 = Mapper.MapPermutation(Permutation.P4, sboxMapped);
 
     // xor p4 with left half of initial permutation
-    const leftHalf = ip.left.xor(p4);
+    const leftHalf = ip.left!.xor(p4);
 
     const root: FK = {
       EP: expanded.toString(),
@@ -47,13 +47,13 @@ class Transformer {
     const fk1 = Transformer.Fk(key1, ip);
 
     // swap variables
-    const swap = new BitBuffer(ip.right.buffer, fk1[0].buffer);
+    const swap = new BitBuffer(ip.right!.buffer, fk1[0].buffer);
 
     // call fk function
     const fk2 = Transformer.Fk(key2, swap);
 
     // combine ip right half and fk result
-    const combined = new BitBuffer(fk2[0].buffer, swap.right.buffer);
+    const combined = new BitBuffer(fk2[0].buffer, swap.right!.buffer);
 
     // ip inverse
     const ip_1 = Mapper.MapPermutation(Permutation.IP_1, combined);
