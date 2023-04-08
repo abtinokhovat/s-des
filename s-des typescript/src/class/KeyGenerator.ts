@@ -1,10 +1,10 @@
-import { Mapper } from "./Mapper";
+import Mapper from "./Mapper";
 import { Permutation } from "../constants/permutation";
 import { KeyGeneration } from "../entity/flow";
 import BitBuffer from "./BitBuffer";
 import { Keys } from "../entity/keys";
 
-export class KeyGenerator {
+export default class KeyGenerator {
   static generate(secretBitArray: Array<number>): [Keys, KeyGeneration] {
     const secret = new BitBuffer(secretBitArray);
     const root = new KeyGeneration();

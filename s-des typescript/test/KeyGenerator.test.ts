@@ -1,5 +1,4 @@
-import { KeyGenerator } from "../src/class/KeyGenerator";
-import BitBuffer from "../src/class/BitBuffer";
+import KeyGenerator from "../src/class/KeyGenerator";
 
 describe("KeyGenerator", () => {
   const secretBitArray = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0];

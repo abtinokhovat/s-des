@@ -1,5 +1,5 @@
 import BitBuffer from "./BitBuffer";
-import { Mapper } from "./Mapper";
+import Mapper from "./Mapper";
 import { Permutation } from "../constants/permutation";
 import { FK, Transform } from "../entity/flow";
 import { Keys } from "../entity/keys";

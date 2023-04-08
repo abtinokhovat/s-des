@@ -1,5 +1,5 @@
 import BitBuffer from "../src/class/BitBuffer";
-import { Mapper } from "../src/class/Mapper";
+import Mapper from "../src/class/Mapper";
 import { Permutation } from "../src/constants/permutation";
 
 describe("Mapper", () => {

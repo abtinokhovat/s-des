@@ -1,6 +1,6 @@
 import BitBuffer from "./class/BitBuffer";
-import { KeyGenerator } from "./class/KeyGenetor";
+import KeyGenerator from "./class/KeyGenerator";
+import Mapper from "./class/Mapper";
+import Transformer from "./class/Transformer";
 
-const secretBitArray = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0];
-const [key, root] = KeyGenerator.generate(secretBitArray);
-console.log(root);
+export { BitBuffer, KeyGenerator, Mapper, Transformer };

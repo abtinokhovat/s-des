@@ -1,6 +1,6 @@
 import BitBuffer from "../src/class/BitBuffer";
 import Transformer from "../src/class/Transformer";
-import { KeyGenerator } from "../src/class/KeyGenerator";
+import KeyGenerator from "../src/class/KeyGenerator";
 
 describe("Transformer", () => {
   const secretBitArray = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0];

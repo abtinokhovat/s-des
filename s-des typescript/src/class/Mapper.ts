@@ -1,7 +1,7 @@
 import BitBuffer from "./BitBuffer";
 import { SBox } from "../constants/sbox";
 
-export class Mapper {
+export default class Mapper {
   public static MapPermutation(
     permutation: ReadonlyArray<number>,
     buffer: BitBuffer
