@@ -3,8 +3,12 @@
     "files": true
   },
   "files": [
+    "src/class/*.ts",
+    "src/constants/*.ts",
+    "src/entity/*.ts",
     "src/index.ts",
-    "src/global.d.ts"
+    "src/global.d.ts",
+    "test/*.test.ts"
   ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */

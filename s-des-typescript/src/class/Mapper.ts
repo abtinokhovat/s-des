@@ -39,7 +39,7 @@ export default class Mapper {
     if (s.length === 1) s = `0${s}`;
     const result = new Array<number>(s.length);
     for (let i = 0; i < s.length; i++) {
-      result[i] = parseInt(s[i]);
+      result[i] = parseInt(s[i], 10);
     }
 
     return result;

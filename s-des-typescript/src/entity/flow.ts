@@ -1,3 +1,4 @@
+/* tslint:disable:max-classes-per-file */
 export class Transform {
   IP?: string;
   FK_1?: FK;

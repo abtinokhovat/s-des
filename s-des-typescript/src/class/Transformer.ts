@@ -56,7 +56,7 @@ export default class Transformer {
     const combined = new BitBuffer(fk2[0].buffer, swap.right!.buffer);
 
     // ip inverse
-    const ip_1 = Mapper.MapPermutation(Permutation.IP_1, combined);
+    const ipInverse = Mapper.MapPermutation(Permutation.IP_1, combined);
 
     const root: Transform = {
       IP: ip.toString(),
@@ -64,10 +64,10 @@ export default class Transformer {
       SW: swap.toString(),
       FK_2: fk2[1],
       Combined: combined.toString(),
-      IP_1: ip_1.toString(),
+      IP_1: ipInverse.toString(),
     };
 
-    return [ip_1, root];
+    return [ipInverse, root];
   }
 
   static Decrypt(cipher: BitBuffer, keys: Keys): [BitBuffer, Transform] {

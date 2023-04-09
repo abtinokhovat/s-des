@@ -13,12 +13,12 @@ export default class BitBuffer {
   private static readonly MaxHalfSize = 5;
   private _left: BitBuffer | undefined = undefined;
   private _right: BitBuffer | undefined = undefined;
-  private _buffer: Array<number> = [];
+  private _buffer: number[] = [];
 
-  public get buffer(): Array<number> {
+  public get buffer(): number[] {
     return this._buffer;
   }
-  public set buffer(value: Array<number>) {
+  public set buffer(value: number[]) {
     this._buffer = value;
     this.length = value.length;
 
@@ -61,10 +61,9 @@ export default class BitBuffer {
     }
   }
 
-  public constructor(buffer: Array<number>);
-  public constructor(length: number);
-  public constructor(left: Array<number>, right: Array<number>);
-  public constructor(param1: Array<number> | number, param2?: Array<number>) {
+  public constructor(lengthOrBuffer: number[] | number);
+  public constructor(left: number[], right: number[]);
+  public constructor(param1: number[] | number, param2?: number[]) {
     if (Array.isArray(param1)) {
       if (param2 === undefined) {
         this.length = param1.length;
@@ -91,7 +90,7 @@ export default class BitBuffer {
     }
   }
 
-  //a function for limit length inputs of the class
+  // a function for limit length inputs of the class
   private static checkLength(length: number): void {
     // Check if the length is valid
     const maxLength = 10;
@@ -136,6 +135,7 @@ export default class BitBuffer {
   public xor(second: BitBuffer): BitBuffer {
     const newBuffer = new Array<number>(this.length);
     for (let i = 0; i < this.length; i++)
+      // tslint:disable-next-line:no-bitwise
       newBuffer[i] = this.buffer[i] ^ second.buffer[i];
     return new BitBuffer(newBuffer);
   }

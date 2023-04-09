@@ -5,12 +5,12 @@ import BitBuffer from "./BitBuffer";
 import { Keys } from "../entity/keys";
 
 export default class KeyGenerator {
-  static generate(secretBitArray: Array<number>): [Keys, KeyGeneration] {
+  static generate(secretBitArray: number[]): [Keys, KeyGeneration] {
     const secret = new BitBuffer(secretBitArray);
     const root = new KeyGeneration();
 
     // Rearrange secret using P10
-    let main = Mapper.MapPermutation(Permutation.P10, secret);
+    const main = Mapper.MapPermutation(Permutation.P10, secret);
     root.P10 = main.toString();
 
     // Left Shift by 1 Left Half
