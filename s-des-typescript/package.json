@@ -1,33 +1,34 @@
 {
-  "name": "s-des-typescript",
+  "name": "s-des-ts",
   "version": "1.0.0",
-  "description": "",
-  "main": "./dist/indexm.js",
-  "module": "./dist/indexm.js",
+  "description": "This packages has core functionalities for s-des encryption and decryption",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "run": "ts-node src/index.ts",
-    "build": "tsup src/index.ts",
-    "start": "npm run build -- --watch",
+    "build": "tsc",
+    "prepublishOnly": "npm test && npm run lint",
     "test": "jest --config jest.config.js",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "s-des",
+    "encryption",
+    "decryption"
+  ],
+  "author": "Abtin Okhovat",
   "license": "ISC",
-  "exports": {
-    "default": "./dist/index.cjs",
-    "require": "./dist/index.cjs",
-    "import": "./dist/index.mjs",
-    "node": "./dist/index.cjs"
-  },
   "devDependencies": {
     "@types/jest": "^29.5.0",
     "prettier": "^2.8.7",
     "ts-jest": "^29.1.0",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
-    "tsup": "^6.7.0",
     "typescript": "^5.0.3"
   }
 }
