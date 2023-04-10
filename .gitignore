@@ -4,6 +4,8 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 
+
+
 .DS_Store
 .vite-ssg-dist
 .vite-ssg-temp
@@ -11,6 +13,7 @@ riderModule.iml
 dist
 dist-ssr
 node_modules
+lib
 .idea/
 *.log
 cypress/downloads
