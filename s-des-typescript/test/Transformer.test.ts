@@ -6,7 +6,7 @@ describe("Transformer", () => {
   const secretBitArray = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0];
   const plainText = new BitBuffer([1, 0, 1, 0, 1, 0, 1, 0]);
 
-  const [keys] = KeyGenerator.generate(secretBitArray);
+  const [keys] = KeyGenerator.Generate(secretBitArray);
 
   describe("Encrypt", () => {
     it("should encrypt plain text correctly", () => {

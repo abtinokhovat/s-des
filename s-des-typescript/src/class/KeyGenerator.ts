@@ -5,7 +5,13 @@ import BitBuffer from "./BitBuffer";
 import { Keys } from "../entity/keys";
 
 export default class KeyGenerator {
-  static generate(secretBitArray: number[]): [Keys, KeyGeneration] {
+  static Generate(secretBitArray: number[]): [Keys, KeyGeneration] {
+    if (secretBitArray.length !== 10)
+      throw new Error("Secret length should be 10.");
+    for (let i = 0; i < secretBitArray.length; i++) {
+      if (secretBitArray[i] !== 0 && secretBitArray[i] !== 1)
+        throw new Error("Invalid value in secret bit array.");
+    }
     const secret = new BitBuffer(secretBitArray);
     const root = new KeyGeneration();
 

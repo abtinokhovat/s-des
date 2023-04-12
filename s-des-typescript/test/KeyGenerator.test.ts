@@ -2,7 +2,7 @@ import KeyGenerator from "../src/class/KeyGenerator";
 
 describe("KeyGenerator", () => {
   const secretBitArray = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0];
-  const [key, root] = KeyGenerator.generate(secretBitArray);
+  const [key, root] = KeyGenerator.Generate(secretBitArray);
 
   it("P10", () => {
     expect(root.P10).toEqual("1101001100");
@@ -30,5 +30,19 @@ describe("KeyGenerator", () => {
 
   it("Key2 Test", () => {
     expect(root.P8_2).toEqual("01010011");
+  });
+
+  it("should throw an error if secret length is not 10", () => {
+    const secret: number[] = [0, 1, 0, 1, 1, 0, 1, 0, 0];
+    expect(() => KeyGenerator.Generate(secret)).toThrowError(
+      "Secret length should be 10."
+    );
+  });
+
+  it("should throw an error if any value in the secret bit array is invalid", () => {
+    const secret: number[] = [0, 1, 0, 2, 1, 0, 1, 0, 0, 1];
+    expect(() => KeyGenerator.Generate(secret)).toThrowError(
+      "Invalid value in secret bit array."
+    );
   });
 });

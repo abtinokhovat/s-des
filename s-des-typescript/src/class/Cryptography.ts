@@ -9,13 +9,12 @@ import "../extensions/string.extension";
 export default class Cryptography {
   /**
    Generates a key using the provided secret array.
-   @param {number[]} secret - The secret array used to generate the key. Must have a length of 10.
+   @param {number[]} secret - The secret bit array used to generate the key. Must have a length of 10.
    @returns {Keys} - An object containing the generated keys.
    @throws {Error} - Throws an error if the secret array does not have a length of 10.
    */
   public static GenerateKey(secret: number[]): Keys {
-    if (secret.length !== 10) throw new Error("Secret length should be 10.");
-    const [keys, _] = KeyGenerator.generate(secret);
+    const [keys, _] = KeyGenerator.Generate(secret);
     return keys;
   }
 
