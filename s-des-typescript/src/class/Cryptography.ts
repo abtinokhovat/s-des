@@ -1,17 +1,16 @@
-import Transformer from "./Transformer";
-import { Keys } from "../entity/keys";
-import KeyGenerator from "./KeyGenerator";
-import BitBufferArray from "./BitBufferArray";
-import "../extensions/string.extension";
-
-//TODO:unit tests
+import Transformer from './Transformer';
+import { Keys } from '../entity/keys';
+import KeyGenerator from './KeyGenerator';
+import BitBufferArray from './BitBufferArray';
+import '../extensions/string.extension';
 
 export default class Cryptography {
   /**
-   Generates a key using the provided secret array.
-   @param {number[]} secret - The secret bit array used to generate the key. Must have a length of 10.
-   @returns {Keys} - An object containing the generated keys.
-   @throws {Error} - Throws an error if the secret array does not have a length of 10.
+   * Generates a key using the provided secret array.
+   *
+   * @param {number[]} secret - The secret bit array used to generate the key. Must have a length of 10.
+   * @returns {Keys} - An object containing the generated keys.
+   * @throws {Error} - Throws an error if the secret array does not have a length of 10.
    */
   public static GenerateKey(secret: number[]): Keys {
     const [keys, _] = KeyGenerator.Generate(secret);
@@ -19,10 +18,11 @@ export default class Cryptography {
   }
 
   /**
-   Encrypts the provided string using the provided keys.
-   @param {string} string - The string to encrypt.
-   @param {Keys} keys - An object containing the encryption keys.
-   @returns {BitBuffer[]} - An array of BitBuffer objects representing the encrypted string.
+   * Encrypts the provided string using the provided keys.
+   *
+   * @param {string} string - The string to encrypt.
+   * @param {Keys} keys - An object containing the encryption keys.
+   * @returns {BitBuffer[]} - An array of BitBuffer objects representing the encrypted string.
    */
   public static Encryption(string: string, keys: Keys): BitBufferArray {
     const buffers = string.toBinary();
@@ -35,10 +35,11 @@ export default class Cryptography {
   }
 
   /**
-   Decrypts the provided cipher BitBuffer array using the provided keys.
-   @param {BitBuffer[]} cipherBitArray - An array of BitBuffer objects representing the cipher to decrypt.
-   @param {Keys} keys - An object containing the decryption keys.
-   @returns {string} - The decrypted string.
+   * Decrypts the provided cipher BitBuffer array using the provided keys.
+   *
+   * @param {BitBuffer[]} cipherBitArray - An array of BitBuffer objects representing the cipher to decrypt.
+   * @param {Keys} keys - An object containing the decryption keys.
+   * @returns {string} - The decrypted string.
    */
   public static Decryption(cipherBitArray: BitBufferArray, keys: Keys): string {
     const plainBytes = new BitBufferArray();

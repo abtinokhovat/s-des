@@ -1,21 +1,17 @@
-import BitBuffer from "./BitBuffer";
-import { SBox } from "../constants/sbox";
+import BitBuffer from './BitBuffer';
+import { SBox } from '../constants/sbox';
 
 export default class Mapper {
-  /**
-   Utility class that provides methods for mapping bit buffers with given permutation or S-Box.
-   */
+  /** Utility class that provides methods for mapping bit buffers with given permutation or S-Box. */
 
   /**
-   Maps the given BitBuffer with the provided permutation array.
-   @param {ReadonlyArray<number>} permutation - The permutation array.
-   @param {BitBuffer} buffer - The BitBuffer to be mapped.
-   @returns {BitBuffer} A new BitBuffer mapped using the provided permutation array.
+   * Maps the given BitBuffer with the provided permutation array.
+   *
+   * @param {ReadonlyArray<number>} permutation - The permutation array.
+   * @param {BitBuffer} buffer - The BitBuffer to be mapped.
+   * @returns {BitBuffer} A new BitBuffer mapped using the provided permutation array.
    */
-  public static MapPermutation(
-    permutation: ReadonlyArray<number>,
-    buffer: BitBuffer
-  ): BitBuffer {
+  public static MapPermutation(permutation: ReadonlyArray<number>, buffer: BitBuffer): BitBuffer {
     const result = new Array<number>(permutation.length);
     for (let i = 0; i < permutation.length; i++) {
       result[i] = buffer.buffer[permutation[i] - 1];
@@ -25,10 +21,10 @@ export default class Mapper {
   }
 
   /**
-
-   Maps the given BitBuffer with the provided S-Box array.
-   @param {BitBuffer} buffer - The BitBuffer to be mapped.
-   @returns {BitBuffer} A new BitBuffer mapped using the provided S-Box array.
+   * Maps the given BitBuffer with the provided S-Box array.
+   *
+   * @param {BitBuffer} buffer - The BitBuffer to be mapped.
+   * @returns {BitBuffer} A new BitBuffer mapped using the provided S-Box array.
    */
   public static MapWithSboxs(buffer: BitBuffer): BitBuffer {
     const mapping = [0, 3, 1, 2];
@@ -39,27 +35,17 @@ export default class Mapper {
   }
 
   /**
-
-   Maps the given BitBuffer with the provided S-Box and mapping array.
-   @param {BitBuffer} buffer - The BitBuffer to be mapped.
-   @param {number[][]} sBox - The S-Box array.
-   @param {number[]} mapping - The mapping array.
-   @returns {number[]} An array of mapped values.
-   @private
+   * Maps the given BitBuffer with the provided S-Box and mapping array.
+   *
+   * @private
+   * @param {BitBuffer} buffer - The BitBuffer to be mapped.
+   * @param {number[][]} sBox - The S-Box array.
+   * @param {number[]} mapping - The mapping array.
+   * @returns {number[]} An array of mapped values.
    */
-  private static MapWithSbox(
-    buffer: BitBuffer,
-    sBox: number[][],
-    mapping: number[]
-  ): number[] {
-    const row = parseInt(
-      `${buffer.buffer[mapping[0]]}${buffer.buffer[mapping[1]]}`,
-      2
-    );
-    const column = parseInt(
-      `${buffer.buffer[mapping[2]]}${buffer.buffer[mapping[3]]}`,
-      2
-    );
+  private static MapWithSbox(buffer: BitBuffer, sBox: number[][], mapping: number[]): number[] {
+    const row = parseInt(`${buffer.buffer[mapping[0]]}${buffer.buffer[mapping[1]]}`, 2);
+    const column = parseInt(`${buffer.buffer[mapping[2]]}${buffer.buffer[mapping[3]]}`, 2);
     let s = sBox[row][column].toString(2);
     if (s.length === 1) s = `0${s}`;
     const result = new Array<number>(s.length);
