@@ -1,8 +1,10 @@
 import Transformer from "./Transformer";
 import { Keys } from "../entity/keys";
-import { BinaryUtil } from "./BinaryUtil";
 import KeyGenerator from "./KeyGenerator";
 import BitBufferArray from "./BitBufferArray";
+import "../extensions/string.extension";
+
+//TODO:unit tests
 
 export default class Cryptography {
   /**
@@ -24,8 +26,8 @@ export default class Cryptography {
    @returns {BitBuffer[]} - An array of BitBuffer objects representing the encrypted string.
    */
   public static Encryption(string: string, keys: Keys): BitBufferArray {
-    const buffers = BinaryUtil.toBinary(string);
-    const cipherBuffer: BitBufferArray = [];
+    const buffers = string.toBinary();
+    const cipherBuffer = new BitBufferArray();
     for (const buffer of buffers) {
       const [cipherByte, _] = Transformer.Encrypt(buffer, keys);
       cipherBuffer.push(cipherByte);
@@ -40,11 +42,11 @@ export default class Cryptography {
    @returns {string} - The decrypted string.
    */
   public static Decryption(cipherBitArray: BitBufferArray, keys: Keys): string {
-    const plainBytes: BitBufferArray = [];
+    const plainBytes = new BitBufferArray();
     for (const bitBuffer of cipherBitArray) {
       const [plainByte, _] = Transformer.Decrypt(bitBuffer, keys);
       plainBytes.push(plainByte);
     }
-    return BinaryUtil.toAscii(plainBytes);
+    return plainBytes.toAscii();
   }
 }
