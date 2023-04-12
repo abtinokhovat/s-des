@@ -5,6 +5,12 @@ import BitBuffer from "./BitBuffer";
 import { Keys } from "../entity/keys";
 
 export default class KeyGenerator {
+  /**
+    Generate keys based on the secret bit array
+    @param {number[]} secretBitArray - An array of 10 bits containing the secret key
+    @throws {Error} - If the secretBitArray length is not equal to 10 or any value in the array is not 0 or 1
+    @returns {[Keys, KeyGeneration]} - An array containing the generated keys and the key generation process
+  */
   static Generate(secretBitArray: number[]): [Keys, KeyGeneration] {
     if (secretBitArray.length !== 10)
       throw new Error("Secret length should be 10.");

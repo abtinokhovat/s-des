@@ -4,7 +4,17 @@ import { Permutation } from "../constants/permutation";
 import { FK, Transform } from "../entity/flow";
 import { Keys } from "../entity/keys";
 
+/**
+ * Class representing s-des Network cipher transformer.
+ */
 export default class Transformer {
+  /**
+   * Performs the s-des function on the right half of the initial permutation.
+   *
+   * @param {BitBuffer} key - The key to use for the s-des function.
+   * @param {BitBuffer} ip - The initial permutation.
+   * @returns {[BitBuffer, FK]} An array containing the left half of the initial permutation after the s-des function and an object containing the intermediate results.
+   */
   static Fk(key: BitBuffer, ip: BitBuffer): [BitBuffer, FK] {
     // expand by permutation
     const expanded = Mapper.MapPermutation(Permutation.EP, ip.right!);
@@ -31,6 +41,14 @@ export default class Transformer {
     return [leftHalf, root];
   }
 
+  /**
+   * Transforms the input using s-des Network cipher.
+   *
+   * @param {BitBuffer} cipher - The input to transform.
+   * @param {Keys} keys - The keys to use for the transformation.
+   * @param {boolean} decrypt - If true, decrypts the input; otherwise, encrypts the input.
+   * @returns {[BitBuffer, Transform]} An array containing the transformed output and an object containing the intermediate results.
+   */
   static Transform(
     cipher: BitBuffer,
     keys: Keys,
@@ -70,10 +88,25 @@ export default class Transformer {
     return [ipInverse, root];
   }
 
+  /**
+   * Decrypts the input using s-des Network cipher.
+   *
+   * @param {BitBuffer} cipher - The input to decrypt.
+   * @param {Keys} keys - The keys to use for decryption.
+   * @returns {[BitBuffer, Transform]} An array containing the decrypted output and an object containing the intermediate results.
+   */
+
   static Decrypt(cipher: BitBuffer, keys: Keys): [BitBuffer, Transform] {
     return Transformer.Transform(cipher, keys, true);
   }
 
+  /**
+   * Encrypts the input using s-des Network cipher.
+   *
+   * @param {BitBuffer} plain - The input to encrypt.
+   * @param {Keys} keys - The keys to use for encryption.
+   * @returns {[BitBuffer, Transform]} An array containing the encrypted output and an object containing the intermediate results.
+   */
   static Encrypt(plain: BitBuffer, keys: Keys): [BitBuffer, Transform] {
     return Transformer.Transform(plain, keys, false);
   }
