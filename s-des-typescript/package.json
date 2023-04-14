@@ -1,6 +1,6 @@
 {
   "name": "s-des-ts",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "This packages has core functionalities for s-des encryption and decryption",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
