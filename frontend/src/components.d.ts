@@ -7,6 +7,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BinaryArray: typeof import("./components/BinaryElement.vue")["default"]
+    BinaryElement: typeof import('./components/BinaryElement.vue')['default']
+    BinaryElementArray: typeof import('./components/BinaryElementArray.vue')['default']
     CustomEdge: typeof import('./components/CustomEdge.vue')['default']
     CustomNode: typeof import('./components/CustomNode.vue')['default']
     KeyGeneration: typeof import('./components/KeyGeneration/KeyGeneration.vue')['default']
@@ -15,7 +18,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SecretNode: typeof import('./components/SecretNode.vue')['default']
-    TheArrow: typeof import('./components/TheArrow.vue')['default']
+    TheArrow: typeof import("./components/TheArrow.vue")["default"]
     TheBox: typeof import('./components/TheBox.vue')['default']
     TheCounter: typeof import('./components/TheCounter.vue')['default']
     TheFooter: typeof import('./components/TheFooter.vue')['default']
