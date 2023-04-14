@@ -743,7 +743,11 @@ const { nodes, setInteractive } = useVueFlow({
 });
 
 onMounted(() => {
-  if (route.query.plain) store.setPlain(route.query.plain as string);
+  if (route.query.plain) {
+    store.setPlain(route.query.plain as string);
+    if (route.query.secret?.length === 10)
+      store.setSecret(route.query.secret as string);
+  }
 });
 
 setInteractive(false);

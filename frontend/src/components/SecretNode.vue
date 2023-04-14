@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useDataStore } from "~/stores/data";
+import { storeToRefs } from "pinia";
 
 const store = useDataStore();
 const { update, setSecret } = store;
+const { secret } = storeToRefs(store);
 
 const props = defineProps({
   data: {
@@ -11,11 +13,15 @@ const props = defineProps({
   },
 });
 
-const secret = ref("1010101010");
+const secretData = ref("1010101010");
 
-watch(secret, (newPlain, oldPlain) => {
-  if (newPlain.length >= 11) secret.value = oldPlain;
-  setSecret(secret.value);
+watch(secretData, (newPlain, oldPlain) => {
+  if (newPlain.length >= 11) secretData.value = oldPlain;
+  setSecret(secretData.value);
+});
+
+onMounted(() => {
+  if (secret.value.length === 10) secretData.value = secret.value;
 });
 </script>
 
@@ -28,7 +34,7 @@ watch(secret, (newPlain, oldPlain) => {
       <div>
         <input
           style="letter-spacing: 5px"
-          v-model="secret"
+          v-model="secretData"
           class="w-35 text-center bg-transparent !outline-none"
         />
       </div>

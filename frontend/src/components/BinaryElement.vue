@@ -6,10 +6,17 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  secret: {
+    type: String,
+    required: true,
+  },
 });
 
 function route() {
-  router.push({ path: "/", query: { plain: props.binary } });
+  router.push({
+    path: "/",
+    query: { plain: props.binary, secret: props.secret },
+  });
 }
 </script>
 

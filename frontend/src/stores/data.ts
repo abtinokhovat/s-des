@@ -29,14 +29,24 @@ export const useDataStore = defineStore("data", {
     },
   },
   actions: {
+    parseBinary(val: string): string {
+      const newString: string[] = [];
+      for (let i = 0; i < val.length; i++) {
+        if (val[i] !== "0" && val[i] !== "1") newString.push("0");
+        else newString.push(val[i]);
+      }
+      return newString.join("");
+    },
     setPlain(val: string): void {
       const maxPlainLength = 8;
-      this.plain = this.normalize(maxPlainLength, val);
+      const str = this.parseBinary(val);
+      this.plain = this.normalize(maxPlainLength, str);
       this.update();
     },
     setSecret(val: string): void {
       const maxSecretLength = 10;
-      this.secret = this.normalize(maxSecretLength, val);
+      const str = this.parseBinary(val);
+      this.secret = this.normalize(maxSecretLength, str);
       this.update();
     },
     normalize(length: number, value: string): string {

@@ -52,7 +52,10 @@ watch(plain, () => {
     <div class="ml-6">
       <span>Bit Representation Plain Text </span>
       <div class="binary">
-        <binary-element-array :binary-array="bitArrayPlain as string" />
+        <binary-element-array
+          :binary-array="bitArrayPlain as string"
+          :secret="secret"
+        />
       </div>
     </div>
   </div>
