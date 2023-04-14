@@ -9,14 +9,11 @@ import TheFooter from "~/components/TheFooter.vue";
 
 const edgeLabelBgStyle = { fill: "skyblue" };
 
+const route = useRoute();
 const store = useDataStore();
 const { plain, flow } = storeToRefs(store);
 
 const data = flow;
-
-function log() {
-  console.log(nodes.value.map((a) => a.id));
-}
 
 const { nodes, setInteractive } = useVueFlow({
   fitViewOnInit: true,
@@ -25,7 +22,7 @@ const { nodes, setInteractive } = useVueFlow({
       id: "secret",
       type: "secret",
       data: { title: "Secret" },
-      position: { x: 355, y: 80 },
+      position: { x: 335, y: 80 },
     },
     // Key Generation
     {
@@ -743,6 +740,10 @@ const { nodes, setInteractive } = useVueFlow({
       labelBgStyle: edgeLabelBgStyle,
     },
   ],
+});
+
+onMounted(() => {
+  if (route.query.plain) store.setPlain(route.query.plain as string);
 });
 
 setInteractive(false);

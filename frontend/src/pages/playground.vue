@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Cryptography } from "s-des-ts";
+import BinaryElementArray from "~/components/BinaryElementArray.vue";
 
 const plain = ref("");
 const secret = ref("");
@@ -51,7 +52,7 @@ watch(plain, () => {
     <div class="ml-6">
       <span>Bit Representation Plain Text </span>
       <div class="binary">
-        {{ bitArrayPlain }}
+        <binary-element-array :binary-array="bitArrayPlain as string" />
       </div>
     </div>
   </div>
@@ -75,10 +76,6 @@ watch(plain, () => {
 <style scoped>
 .block {
   @apply border-2 rounded-md border-yellow-400 border-dashed flex flex-col md:flex-row lg:flex-row p-2 bg-gray-200 dark:bg-gray-600;
-}
-
-.binary {
-  @apply text-green-400 bg-transparent rounded-md w-xs max-h-[150px] overflow-y-scroll;
 }
 
 textarea {
