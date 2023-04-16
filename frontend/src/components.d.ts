@@ -10,6 +10,8 @@ declare module '@vue/runtime-core' {
     BinaryArray: typeof import("./components/BinaryElement.vue")["default"]
     BinaryElement: typeof import('./components/BinaryElement.vue')['default']
     BinaryElementArray: typeof import('./components/BinaryElementArray.vue')['default']
+    BitArrayInput: typeof import('./components/BitArrayInput.vue')['default']
+    BitInput: typeof import('./components/BitInput.vue')['default']
     CustomEdge: typeof import('./components/CustomEdge.vue')['default']
     CustomNode: typeof import('./components/CustomNode.vue')['default']
     KeyGeneration: typeof import('./components/KeyGeneration/KeyGeneration.vue')['default']
