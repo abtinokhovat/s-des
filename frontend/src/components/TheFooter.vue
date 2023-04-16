@@ -39,5 +39,8 @@ const { t, availableLocales, locale } = useI18n();
     >
       <div i-carbon-logo-github />
     </a>
+    <div class="mt-5 mx-auto text-center opacity-75 dark:opacity-50 text-sm">
+      Abtin Okhovat
+    </div>
   </nav>
 </template>
