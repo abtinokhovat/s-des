@@ -17,7 +17,6 @@ const props = defineProps({
   },
   secret: {
     type: String,
-    required: true,
   },
 });
 
@@ -25,9 +24,10 @@ const splitBinaryArray = computed(() => props.binaryArray?.split("-"));
 </script>
 
 <template>
-  <div class="flex">
+  <div
+    class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-3 gap-1 max-h-[60px] lg:max-h-[150px] overflow-y-scroll"
+  >
     <binary-element
-      class="mr-2"
       v-for="binaryElement in splitBinaryArray"
       :binary="binaryElement"
       :secret="secret"
