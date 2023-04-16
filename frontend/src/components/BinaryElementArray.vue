@@ -6,6 +6,15 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    validator(value: string) {
+      return ["cipher", "plain"].includes(value);
+    },
+    default() {
+      return "plain";
+    },
+  },
   secret: {
     type: String,
     required: true,
@@ -22,6 +31,7 @@ const splitBinaryArray = computed(() => props.binaryArray?.split("-"));
       v-for="binaryElement in splitBinaryArray"
       :binary="binaryElement"
       :secret="secret"
+      :type="type"
     />
   </div>
 </template>
