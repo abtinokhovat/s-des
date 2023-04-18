@@ -757,18 +757,20 @@ nodes.value.find((a) => a.id === "plain")!.selectable = true;
 </script>
 
 <template>
-  <div class="flex justify-center items-center" style="height: 700px">
-    <vue-flow>
-      <template #node-custom="{ data }">
-        <custom-node :data="data" />
-      </template>
-      <template #node-plain="{ data }">
-        <plain-node :data="data" />
-      </template>
-      <template #node-secret="{ data }">
-        <secret-node :data="data" />
-      </template>
-    </vue-flow>
+  <div class="pointer-events-none">
+    <div class="flex justify-center items-center" style="height: 700px">
+      <vue-flow>
+        <template #node-custom="{ data }">
+          <custom-node :data="data" />
+        </template>
+        <template #node-plain="{ data }">
+          <plain-node :data="data" />
+        </template>
+        <template #node-secret="{ data }">
+          <secret-node :data="data" />
+        </template>
+      </vue-flow>
+    </div>
   </div>
   <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
     <the-footer />
