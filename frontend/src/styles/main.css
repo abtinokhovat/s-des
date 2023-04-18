@@ -2,9 +2,18 @@
 @import '@vue-flow/core/dist/style.css';
 @import '@vue-flow/core/dist/theme-default.css';
 
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/JetBrains_Mono/JetBrainsMono-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}
+
 html,
 body,
 #app {
+  font-family: "JetBrains Mono", Helvetica, Arial, monospace;
+  @apply bg-[#323232]
   height: 100%;
   margin: 0;
   padding: 0;
