@@ -51,12 +51,12 @@ watch(plain, () => {
   <div class="grid gap-4 sm:grid-cols-2 sm:grid-rows-2">
     <div class="block order-1">
       <div class="flex flex-col">
-        <span> Plain Text </span>
+        <span class="title"> Plain Text </span>
         <textarea v-model="plain" class="border-1 rounded-md" name="plain">
         </textarea>
       </div>
       <div class="ml-6 grow">
-        <div class="m-2">Bit Representation Plain Text</div>
+        <div class="m-2 title2">Bit Representation Plain Text</div>
         <binary-element-array
           :binary-array="bitArrayPlain as string"
           :secret="secret as string"
@@ -65,12 +65,12 @@ watch(plain, () => {
     </div>
     <div class="block order-3 md:order-2 lg:order-2">
       <div class="flex flex-col">
-        <span> Cipher Text </span>
+        <span class="title"> Cipher Text </span>
         <textarea v-model="cipher" class="border-1 rounded-md" name="plain">
         </textarea>
       </div>
       <div class="ml-6 grow">
-        <div class="m-2">Bit Representation Cipher</div>
+        <div class="m-2 title2">Bit Representation Cipher</div>
         <binary-element-array
           type="cipher"
           :binary-array="bitArrayCipher as string"
@@ -80,7 +80,7 @@ watch(plain, () => {
     <div
       class="flex flex-col mb-2 justify-self-center sm:h-full order-2 md:order-3 lg:order-3 lg:col-span-2"
     >
-      <span> Secret Bits </span>
+      <span class="title"> Secret Bits </span>
       <bit-array-input @on-change="updateSecret" />
     </div>
   </div>
@@ -88,10 +88,19 @@ watch(plain, () => {
 
 <style scoped>
 .block {
-  @apply border-2 rounded-md border-yellow-400 border-dashed flex flex-col lg:flex-row justify-center p-7 bg-gray-200 dark:bg-gray-600;
+  @apply border-2 rounded-md border-yellow-400 border-dashed flex flex-col lg:flex-row justify-center p-7 bg-[#1d1d1d];
+}
+
+.title {
+  @apply text-[#6c6c6c];
+}
+
+.title2 {
+  @apply text-[#f7d959];
 }
 
 textarea {
+  @apply bg-[#323232] border-[#d4d4d4] border-dashed text-[#c7c7c7];
   height: 150px;
   outline: none;
   padding: 2px;

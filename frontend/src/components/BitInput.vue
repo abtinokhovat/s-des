@@ -13,7 +13,7 @@ function change() {
 
 <template>
   <div
-    class="cursor-pointer px-1 bg-red-400 bg-opacity-40 ml-1 rounded-md border-2 border-red-400 min-w-[30px] hover:bg-opacity-30 hover:border-opacity-30"
+    class="cursor-pointer px-1 ml-1 min-w-[30px] border-2 border-dashed border-red-400 bg-red-400 bg-opacity-10 text-[#acb7c4]"
     @click="change"
   >
     {{ bit }}

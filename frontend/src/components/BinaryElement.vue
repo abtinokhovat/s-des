@@ -33,9 +33,9 @@ function route() {
   <div
     :class="{
       'display-none': !binary,
-      'border-green-400 bg-green-400! bg-opacity-70!': type === 'cipher',
+      'text-[#69953d] no-underline': type === 'cipher',
     }"
-    class="cursor-pointer w-90px text-xs p-1 text-white border-2 border-blue-400 rounded-md bg-light-blue-400"
+    class="text-left cursor-pointer w-90px text-xs p-1 text-[#569bd5] underline"
     @click="route"
   >
     <span>
